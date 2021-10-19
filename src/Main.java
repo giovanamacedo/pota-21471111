@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        String[] partes;
+
         try {
             // arquivo com dados de entrada
             File file = new File("arquivoDados.txt");
@@ -15,20 +18,19 @@ public class Main {
                 String linha = scanner.nextLine();
 
                 // quebrando a linha por ","
-                String[] partes = linha.split(",");
+                partes = linha.split(",");
 
                 // exibindo cada dados dos clientes
                 for (int i = 0; i < partes.length; i++) {
                     System.out.print(partes[i] + " - ");
                 }
                 System.out.println();
-
             }
-
             scanner.close();
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+
     }
 }
