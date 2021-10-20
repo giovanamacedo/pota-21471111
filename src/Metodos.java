@@ -1,9 +1,9 @@
 public class Metodos {
 
-    private String[] v;
+    private Clientes[] v;
     private int comparacoes;
 
-    public Metodos(String[] clientes) {
+    public Metodos(Clientes[] clientes) {
         v = clientes;
     }
 
@@ -11,21 +11,21 @@ public class Metodos {
         return comparacoes;
     }
 
-    public int pesquisaBinaria(String nome) {
+    public int pesquisaBinaria(String nome, Clientes[] clientes) {
         int inicio, fim, meio = 0;
 
         comparacoes = 0;
         inicio = 0;
-        fim = v.length - 1;
+        fim = clientes.length - 1;
 
         while (inicio <= fim) {
             meio = (inicio + fim) / 2;
             comparacoes++;
-            if (v[meio].equals(nome)) {
+            if (clientes[meio].equals(nome)) {
                 return meio;
             }
             comparacoes++;
-            if (v[meio].compareTo(nome) < 0) {  // troca para '>' se o vetor estiver ordenado decrescente
+            if (clientes[meio].getNome().compareTo(nome) < 0) {  // troca para '>' se o vetor estiver ordenado decrescente
                 fim = meio - 1;
             } else {
                 inicio = meio + 1;
