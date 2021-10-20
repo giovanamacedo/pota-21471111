@@ -75,10 +75,10 @@ public class Main {
         }
 
         int iniciar = 0;
-        Scanner nomeBuscado = new Scanner(System.in , "UTF-8");
+        Scanner nomeBuscado = new Scanner(System.in);
 
         while(iniciar < 1){
-            System.out.println("- Digite o nome a ser buscado: " + "\n Ou exit para cancelar a operação");
+            System.out.println("Digite o nome a ser buscado ... ou digite exit para cancelar a operação: ");
             String entradaDados = nomeBuscado.nextLine();
             if(entradaDados.equals("exit")){
                 iniciar++;
@@ -86,8 +86,8 @@ public class Main {
                 int indice = pesquisaBinaria(entradaDados);
                 if(indice >0){
                     System.out.println("Nome: "+ nome.get(indice)+", "+" Sexo: "+ sexo.get(indice)+", "
-                                       +" Endereco: "+ endereco.get(indice)+", "+" Cidade: "+ cidade.get(indice)
-                                       +", "+" Email: " + email.get(indice)+ ", "+" Telefone: "+ telefone.get(indice)+ ", "
+                                       +" Endereço: "+ endereco.get(indice)+", "+" Cidade: "+ cidade.get(indice)
+                                       +", "+" E-mail: " + email.get(indice)+ ", "+" Telefone: "+ telefone.get(indice)+ ", "
                                        +" Idade: "+ idade.get(indice));
                 }else{
                     System.out.println("Ops.. nome não identificado no sistema!!");
@@ -97,29 +97,32 @@ public class Main {
         nomeBuscado.close();
     }
 
-    public static int Contador;
+
     public static int pesquisaBinaria(String chave){
         int inicio, meio, fim;
 
         inicio = 0;
         fim = nome.size() - 1;
-        Contador = 0;
+        int comparacoes = 0;
 
         while (inicio <= fim){
             meio = (inicio + fim) / 2;
-            Contador++;
+
+            comparacoes++;
             if (chave.equals(nome.get(meio))){
                 return meio;
             }
-            Contador++;
+            System.out.println("Comparações: "+ comparacoes);
 
+            comparacoes++;
             if (chave.compareTo(nome.get(meio)) < 0) {
                 fim = meio - 1;
             } else {
                 inicio = meio + 1;
             }
+            System.out.println("Comparações: "+ comparacoes);
         }
-        System.out.println("Comparações: "+ Contador);
+
         return -1;
     }
 }
