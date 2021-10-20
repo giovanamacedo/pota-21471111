@@ -1,36 +1,23 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
+//  Integrantes do grupo:
+//  Giovana Macedo Leal Ibiapina - RA: 21471111
+//  Guilherme Morales Gomes - RA: 21447735
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
-        String[] partes;
+        ArrayList <Clientes> clientes = new ArrayList<>();
+        Clientes clientes1 = new Clientes("Ágatha Alves", "female", "Rua Ernesto Rothschild 1418",
+                "São Paulo","AgathaCarvalhoAlves@jourrapide.com", "(11) 8310-5023",34);
+        Clientes clientes2 = new Clientes("Aaron Jarrett","male","1940 Old House Drive",
+                "Worthington","AaronMJarrett@gustr.com","740-971-8937",28);
+        Clientes clientes3 = new Clientes("Joshua Vanalstyne","male","3834 Gorby Lane",
+                "Hattiesburg","JoshuaAVanalstyne@gustr.com","601-246-8318",44);
 
-        try {
-            // arquivo com dados de entrada
-            File file = new File("arquivoDados.txt");
-            Scanner scanner = new Scanner(file);
-
-            // leitura dos dados do cliente
-            while (scanner.hasNextLine()) {
-                // leia a próxima linha do arquivo
-                String linha = scanner.nextLine();
-
-                // quebrando a linha por ","
-                partes = linha.split(",");
-
-                // exibindo cada dados dos clientes
-                for (int i = 0; i < partes.length; i++) {
-                    System.out.print(partes[i] + " - ");
-                }
-                System.out.println();
-            }
-            scanner.close();
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        clientes.add(clientes1);
+        clientes.add(clientes2);
+        clientes.add(clientes3);
 
     }
 }
