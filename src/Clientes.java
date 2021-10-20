@@ -22,4 +22,27 @@ public class Clientes {
         return nome;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
 }

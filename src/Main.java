@@ -2,28 +2,124 @@
 //  Giovana Macedo Leal Ibiapina - RA: 21471111
 //  Guilherme Morales Gomes - RA: 21447735
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.*;
+
 public class Main {
+    public static int contador = 0;
+
+    public static List<String> dadosClientes = new ArrayList<String>();
+
+    public static List<String> nome = new ArrayList<String>();
+    public static List<String> sexo = new ArrayList<String>();
+    public static List<String> endereco = new ArrayList<String>();
+    public static List<String> cidade = new ArrayList<String>();
+    public static List<String> email = new ArrayList<String>();
+    public static List<String> telefone = new ArrayList<String>();
+    public static List<String> idade = new ArrayList<String>();
+
+
     public static void main(String[] args) {
 
-        Clientes agatha = new Clientes("Ágatha Alves", "female", "Rua Ernesto Rothschild 1418",
-                "São Paulo","AgathaCarvalhoAlves@jourrapide.com", "(11) 8310-5023",34);
-        Clientes aaron = new Clientes("Aaron Jarrett","male","1940 Old House Drive",
-                "Worthington","AaronMJarrett@gustr.com","740-971-8937",28);
-        Clientes joshua = new Clientes ("Joshua Vanalstyne","male","3834 Gorby Lane",
-                "Hattiesburg","JoshuaAVanalstyne@gustr.com","601-246-8318",44);
+        try {
+            File file = new File("arquivoDados.txt");
+            Scanner entrada = new Scanner(file);
 
-        Clientes[] nomes = {agatha, aaron, joshua};
+            while (entrada.hasNextLine()) {
+                String linha = entrada.nextLine();
+                dadosClientes.add(linha);
+                contador++;
+            }
 
-        Metodos metodo = new Metodos(nomes);
+            int contadorAux = 0;
 
-        int inicio = metodo.pesquisaBinaria("Agatha", nomes);
-        int fim = metodo.pesquisaBinaria("Joshua", nomes);
+            while(contadorAux < contador){
+                String partes = dadosClientes.get(contadorAux);
+                String[] part = partes.split(",");
+                int controlador = 0;
 
-        while(inicio >= 0 && inicio <= fim) {
-            System.out.println(nomes[inicio].getNome());
-            inicio++;
-            System.out.println("Comparações: " + metodo.getComparacoes());
+                while(controlador <= 6){
+
+                    if(controlador ==0){
+                        nome.add(part[controlador]);
+
+                    } else if(controlador ==1){
+                        sexo.add(part[controlador]);
+
+                    } else if(controlador ==2){
+                        endereco.add(part[controlador]);
+
+                    } else if(controlador ==3){
+                        cidade.add(part[controlador]);
+
+                    } else if(controlador ==4){
+                        email.add(part[controlador]);
+
+                    } else if(controlador ==5){
+                        telefone.add(part[controlador]);
+
+                    } else if(controlador ==6){
+                        idade.add(part[controlador]);
+                    }
+                    controlador++;
+                }
+                contadorAux++;
+            }
+
+            entrada.close();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
 
+        int iniciar = 0;
+        Scanner nomeBuscado = new Scanner(System.in , "UTF-8");
+
+        while(iniciar < 1){
+            System.out.println("- Digite o nome a ser buscado: " + "\n Ou exit para cancelar a operação");
+            String entradaDados = nomeBuscado.nextLine();
+            if(entradaDados.equals("exit")){
+                iniciar++;
+            }else{
+                int indice = pesquisaBinaria(entradaDados);
+                if(indice >0){
+                    System.out.println("Nome: "+ nome.get(indice)+", "+" Sexo: "+ sexo.get(indice)+", "
+                                       +" Endereco: "+ endereco.get(indice)+", "+" Cidade: "+ cidade.get(indice)
+                                       +", "+" Email: " + email.get(indice)+ ", "+" Telefone: "+ telefone.get(indice)+ ", "
+                                       +" Idade: "+ idade.get(indice));
+                }else{
+                    System.out.println("Ops.. nome não identificado no sistema!!");
+                }
+            }
+        }
+        nomeBuscado.close();
+    }
+
+    public static int Contador;
+    public static int pesquisaBinaria(String chave){
+        int inicio, meio, fim;
+
+        inicio = 0;
+        fim = nome.size() - 1;
+        Contador = 0;
+
+        while (inicio <= fim){
+            meio = (inicio + fim) / 2;
+            Contador++;
+            if (chave.equals(nome.get(meio))){
+                return meio;
+            }
+            Contador++;
+
+            if (chave.compareTo(nome.get(meio)) < 0) {
+                fim = meio - 1;
+            } else {
+                inicio = meio + 1;
+            }
+        }
+        System.out.println("Comparações: "+ Contador);
+        return -1;
     }
 }
